@@ -1,19 +1,5 @@
 extends "res://Qtoolkit/quick_core.gd"
 
-class Quick extends Node:
-	"""
-	func qInterpret(file):
-		var qs_file = QuickFile.open(file)
-		var _is = QuickScript.verifyQuickScript(qs_file)
-		if _is:
-			qs_file = QuickScript.interpretHeader(qs_file)
-			print(qs_file)
-		else:
-			print("Error in ("+file+") is not a quickscript file.")
-			print(qs_file)
-	"""
-
-
 func about():
 	"""
 	Welcome, QuickToolKit contains some fast functions to you use.
