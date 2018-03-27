@@ -1,10 +1,8 @@
 extends "res://Qtoolkit/quick_core.gd"
 
-<<<<<<< HEAD
 var applicationProperties = {}
 
-=======
->>>>>>> fe6c3cb5fa0e1952b35fcd1fb30229723f7db354
+
 func about():
 	"""
 	Welcome, QuickToolKit contains some fast functions to you use.
