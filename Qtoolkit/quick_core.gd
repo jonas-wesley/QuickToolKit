@@ -7,6 +7,8 @@ const ERROR = "error"
 const LOG = "log"
 const WARNING = "warning"
 
+var TypeFile = File.new()
+
 func echo(type, arg):
 	"""
 	@ Class / Method description
@@ -32,7 +34,7 @@ func require_library(library_name):
 	var library
 	var library_path = 'res://Qtoolkit/libs/' + library_name
 	
-	if !File.new().file_exists(library_path):
+	if !TypeFile.file_exists(library_path):
 		print("Framework library: <" + library_path + "> [no exist]")
 	else:
 		var libraryExist = frameworkSearchLibrary(library_name)
@@ -58,7 +60,7 @@ func require(module_name, module_download):
 	var module
 	var module_path = 'res://Qtoolkit/modules/public/' + module_name
 	
-	if !File.new().file_exists(module_path):
+	if !TypeFile.file_exists(module_path):
 		print("Inner module: <" + module_path + "> [no exist]")
 	else:
 		var moduleExist = frameworkSearchModule(module_name)
