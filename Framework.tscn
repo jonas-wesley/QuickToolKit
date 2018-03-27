@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Framework.gd" type="Script" id=1]
 
-[node name="Framework" type="Node"]
+[node name="Framework" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

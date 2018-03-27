@@ -14,4 +14,4 @@ func _http_connect(host, port):
 	return http
 
 func _init():
-	print("Module initialized")
+	pass #print("Module initialized")

@@ -1,117 +1,29 @@
 extends "res://Qtoolkit/quick_process.gd"
 
+var cout = require_library("sys/console_output.gd")
 
-class QuickCore extends Node:
+const PRINT = "print"
+const ERROR = "error"
+const LOG = "log"
+const WARNING = "warning"
+
+func echo(type, arg):
 	"""
 	@ Class / Method description
 	"""
-	static func echo(string):
-		print(string)
+	if type == PRINT:
+		cout.outputPrint(arg)
+	elif type == ERROR:
+		# Finalize app
+		cout.outputError(arg, get_tree())
+	elif type == WARNING:
+		cout.outputWarning(arg)
+	elif type == LOG:
+		cout.outputLog(arg)
+	else:
+		cout.outputPrint("Echo error, type not exist.")
 	
 
-class QuickFile:
-	"""
-	@ Class / Method description
-	"""
-	
-	static func open(_file):
-		"""
-		@ Class / Method description
-		"""
-		var file = File.new()
-		file.open(_file, file.READ)
-		var content = file.get_as_text()
-		file.close()
-		return content
-	
-	static func require(module_path, module_download):
-		"""
-		@ Class / Method description
-		"""
-		
-		var f = File.new()
-		module_path = 'res://Qtoolkit/modules/public/' + module_path
-		if !f.file_exists(module_path):
-			print("module: " + module_path + " no exist, download? : " + str(module_download))
-			if module_download:
-				# download module
-				print("downloading:  " + module_path + " module, please wait...")
-		else:
-			var module = load(module_path).new()
-			# include module
-			print("<" + module_path + "> [added]")
-			# return module object
-			return module
-	
-	func require_qlib(module_path):
-		"""
-		@ Class / Method description
-		"""
-		
-		var f = File.new()
-		if !f.file_exists(module_path):
-			print("module: <" + module_path + "> [no exist]")
-		else:
-			var module = load(module_path).new()
-			# include module
-			print("<" + module_path + "> [added]")
-			# return module object
-			return module
-	
-class QuickScript:
-	"""
-	@ Class / Method description
-	"""
-	
-	# load modules
-	var consts = QuickFile.require_qlib('res://Qtoolkit/libs/const.gd')
-	
-	func verifyQuickScript(arg):
-		"""
-		@ Class / Method description
-		"""
-		var qs = consts.QTK_SCRIPT
-		var count = qs.length()
-		var is_qs = false
-		
-		for i in range(count):
-			if arg[i] == qs[i]:
-				is_qs = true
-				continue
-			else:
-				is_qs = false
-				break;
-		
-		return is_qs
-	
-	func interpretHeader(arg):
-		"""
-		@ Class / Method description
-		"""
-		var libs = {}
-		var coments = {}
-		var qs = consts.QTK_SCRIPT
-		var count = qs.length()
-		var end = false
-		var chars = arg.length()
-		
-		# remove qs indicator
-		arg = arg.substr(count, arg.length())
-		count = arg.length()
-		
-		for i in range(count):
-			if arg[i]=="#" or arg[i]==":":
-				if arg[i]==":":
-					# this is a class
-					end = true
-					break
-			else:
-				if !end:
-					continue
-				else:
-					break;
-		return arg
-	
 
 func require_library(library_name):
 	"""
@@ -128,7 +40,7 @@ func require_library(library_name):
 		if !libraryExist:
 			library = load(library_path).new()
 			# include module
-			print("<" + library_path + "> [added]")
+			#print("Framework library: <" + library_path + "> [added]")
 			
 			frameworkAddLibrary(library_name, library_path, library)
 			
@@ -138,21 +50,28 @@ func require_library(library_name):
 		return library
 	
 
-func require(module_path, module_download):
+
+func require(module_name, module_download):
 	"""
 	@ Class / Method description
 	"""
+	var module
+	var module_path = 'res://Qtoolkit/modules/public/' + module_name
 	
-	var f = File.new()
-	module_path = 'res://Qtoolkit/modules/public/' + module_path
-	if !f.file_exists(module_path):
-		print("module: " + module_path + " no exist, download? : " + str(module_download))
-		if module_download:
-			# download module
-			print("downloading:  " + module_path + " module, please wait...")
+	if !File.new().file_exists(module_path):
+		print("Inner module: <" + module_path + "> [no exist]")
 	else:
-		var module = load(module_path).new()
-		# include module
-		print("<" + module_path + "> [added]")
-		# return module object
+		var moduleExist = frameworkSearchModule(module_name)
+		
+		if !moduleExist:
+			module = load(module_path).new()
+			# include module
+			#print("Extern module: <" + module_path + "> [added]")
+			
+			frameworkAddModule(module_name, module_path, module)
+			
+		else:
+			module = moduleExist
+		
 		return module
+	

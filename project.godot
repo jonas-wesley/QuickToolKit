@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="QuickToolKit"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Framework.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -25,4 +25,3 @@ enabled=PoolStringArray( "Environment2D" )
 [rendering]
 
 environment/default_clear_color="808080"
-environment/default_environment="res://default_env.tres"
