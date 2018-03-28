@@ -1,5 +1,5 @@
 # QuickToolKit
-QuickToolKit GDScript(Godot) Framework
+QuickToolKit Godot Framework
 
 	Welcome, QuickToolKit contains some fast functions to you use.
 	written by Jonas Wesley(trancecode) and contributors
