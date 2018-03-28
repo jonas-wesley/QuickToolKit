@@ -5,6 +5,8 @@ export(String) var ENVIRONMENT = DEVELOPMENT
 var cout = require_library("sys/console_output")
 
 
+var TypeFile = File.new()
+
 func echo(type, arg):
 	"""
 	@ Class / Method description
@@ -75,6 +77,7 @@ func require(module_name, module_download):
 		
 		return module
 	
+<<<<<<< HEAD
 
 func get_environment():
 	"""
@@ -87,3 +90,5 @@ func get_environment():
 		ext = ".gdc"
 	
 	return ext
+=======
+>>>>>>> 4c317aedee84a100cc3abe20be832a6ce6b51b90
