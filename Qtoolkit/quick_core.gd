@@ -5,7 +5,7 @@ export(String) var ENVIRONMENT = DEVELOPMENT
 var cout = require_library("sys/console_output")
 
 
-var TypeFile = File.new()
+
 
 func echo(type, arg):
 	"""
