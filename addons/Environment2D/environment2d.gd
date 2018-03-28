@@ -1,7 +1,7 @@
 extends "res://Qtoolkit/quick.gd"
 
 # Load framework libs
-var Colors = require_library("misc/colors.gd")
+var Colors = require_library("misc/colors")
 
 # Export variables section
 # Background color

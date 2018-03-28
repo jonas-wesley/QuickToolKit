@@ -1,9 +1,4 @@
-extends Node
-
-# MATH
-const BASE_OCTAL = 8
-const BASE_DECIMAL = 10
-const BASE_HEXADECIMAL = 16
+extends "res://Qtoolkit/libs/global_librarys.gd"
 
 # QUICKTOOLKIT CONSTS 
 const QTK_SCRIPT = "#!quickscript"
@@ -14,9 +9,18 @@ const PATH = "res://Qtoolkit/quick.gd"
 const SEND = 'send'
 const RECEIVE = 'receive'
 
+# Echo / Error type
+const PRINT = "print"
+const ERROR = "error"
+const LOG = "log"
+const WARNING = "warning"
 
-# MOVEMENT
-const UP = 'up'
-const DOWN = 'down'
-const LEFT = 'left'
-const RIGHT = 'right'
+# MATH
+const BASE_OCTAL = 8
+const BASE_DECIMAL = 10
+const BASE_HEXADECIMAL = 16
+
+# Especials
+const DEVELOPMENT = "development"
+const PRODUCTION = "production"
+

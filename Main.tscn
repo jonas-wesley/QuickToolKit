@@ -9,14 +9,16 @@
 script/source = "extends \"res://Qtoolkit/quick.gd\"
 
 # Load framework libs
-var Colors = require_library(\"misc/colors.gd\")
+var Colors = require_library(\"misc/colors\")
 
 func _ready():
 	$Control/Button.connect(\"button_down\", self, \"changeBgColor\")
 	$Control/Button2.connect(\"button_down\", self,\"effect\")
+	
 
 func changeBgColor():
 	$Environment2D.transition(Colors.Black)
+	
 
 func effect():
 	$Environment2D.snow()
@@ -25,6 +27,7 @@ func effect():
 [node name="Main" type="Node2D"]
 
 script = SubResource( 1 )
+ENVIRONMENT = null
 
 [node name="Environment2D" type="Node2D" parent="." index="0"]
 
@@ -32,7 +35,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-backgroundColor = "Black"
+ENVIRONMENT = "Null"
+backgroundColor = "White"
 useHexColor = null
 BgHexColor = "000000"
 useImage = null

@@ -1,19 +1,16 @@
 extends "res://Qtoolkit/quick.gd"
 
+# Use framework example
 # Load framework librarys
-var Colors = require_library("misc/colors.gd")
-var Gui = require_library("gui/resolutions.gd")
-var Date = require_library("sys/date.gd")
-var Consts = require_library("const.gd")
+var Gui = require_library("gui/resolutions")
+var Date = require_library("sys/date")
 
 func _ready():
 	applicationProperties["appTitle"] = "My new application"
-	applicationProperties["appDisplay"] = Gui.QVGA
-	applicationProperties["appBackgroundColor"] = Colors.DeepSkyBlue
+	applicationProperties["appBackgroundColor"] = Gl_Colors.DeepSkyBlue
+	applicationProperties["appResolutionDialog"] = true
 	
 	setAppProperties()
 	startApplication()
-	
-	frameworkGetLibrarys()
 	
 

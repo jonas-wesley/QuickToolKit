@@ -1,10 +1,7 @@
 extends "res://Qtoolkit/quick_core.gd"
 
-<<<<<<< HEAD
 var applicationProperties = {}
 
-=======
->>>>>>> fe6c3cb5fa0e1952b35fcd1fb30229723f7db354
 func about():
 	"""
 	Welcome, QuickToolKit contains some fast functions to you use.
@@ -13,11 +10,13 @@ func about():
 	Copyright (c) 2017-2018 QuickToolKit
 	"""
 	# Load constants lib
-	var consts = require_library("const.gd")
+	var consts = require_library("const")
 	# Show welcome message
 	echo(PRINT, "QuickToolKit " + consts.QTK_VERSION + "| OS: " + str(OS.get_name()))
 	# Destroy (consts) 
 	consts.free()
+	
+	
 
 
 func _init():
@@ -26,17 +25,24 @@ func _init():
 	"""
 	
 	applicationProperties = {
-		"appTitle" : "My QTK App",
-		"appDisplay" : Vector2(540, 480),
+		"appTitle" : "My Godot/QTK App",
+		"appDisplay" : Vector2(240, 240),
 		"appBackgroundColor" : "A9A9A9",
-		"appMainScene" : "Main.tscn"
+		"appMainScene" : "Main.tscn",
+		"appResolutionDialog" : false
 	}
 	
 
 func _ready():
+	"""
+	@ Method description
+	"""
 	get_tree().set_auto_accept_quit(false)
 
 func _notification(what):
+	"""
+	@ Method description
+	"""
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		# Execute functions before App finalized
 		print('QuickToolKit app finalized.')
@@ -45,11 +51,13 @@ func _notification(what):
 	
 
 func setAppProperties():
-	
+	"""
+	@ Method description
+	"""
 	var error = 0
 	var msg = null
 	
-	if applicationProperties.size() != 0:
+	if applicationProperties.size() != 0 && !applicationProperties["appResolutionDialog"]:
 		
 		var prop = applicationProperties
 		
@@ -76,14 +84,32 @@ func setAppProperties():
 		else:
 			print("App set settings error...")
 			print("Error message: ", msg)
+	
+	elif applicationProperties["appResolutionDialog"]:
 		
+		var GUI = require_library("gui/resolutions")
+		var title = applicationProperties["appTitle"] + " - Game Configuration"
+		
+		OS.set_window_title(title)
+		OS.window_size = GUI.RES_DIALOG #Vector2(445, 380)
+		GUI.free()
+		
+		OS.window_resizable = false
+		
+	
 	else:
 		print("[Error] App settings has empty...")
 	
 
 func startApplication():
+	"""
+	@ Method description
+	"""
 	if applicationProperties["appMainScene"] != null:
-		get_tree().change_scene(applicationProperties["appMainScene"])
+		if applicationProperties["appResolutionDialog"]:
+			get_tree().change_scene("res://Qtoolkit/exts/resolution_dialog.tscn")
+		else:
+			get_tree().change_scene(applicationProperties["appMainScene"])
 	else:
 		echo(ERROR, "Error, main scene not defined.")
 	

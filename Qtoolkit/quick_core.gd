@@ -1,11 +1,9 @@
 extends "res://Qtoolkit/quick_process.gd"
 
-var cout = require_library("sys/console_output.gd")
+export(String) var ENVIRONMENT = DEVELOPMENT
 
-const PRINT = "print"
-const ERROR = "error"
-const LOG = "log"
-const WARNING = "warning"
+var cout = require_library("sys/console_output")
+
 
 func echo(type, arg):
 	"""
@@ -29,10 +27,11 @@ func require_library(library_name):
 	"""
 	@ Class / Method description
 	"""
+	var ext = get_environment()
 	var library
-	var library_path = 'res://Qtoolkit/libs/' + library_name
+	var library_path = 'res://Qtoolkit/libs/' + library_name + ext
 	
-	if !File.new().file_exists(library_path):
+	if !TypeFile.file_exists(library_path):
 		print("Framework library: <" + library_path + "> [no exist]")
 	else:
 		var libraryExist = frameworkSearchLibrary(library_name)
@@ -55,10 +54,11 @@ func require(module_name, module_download):
 	"""
 	@ Class / Method description
 	"""
+	var ext = get_environment()
 	var module
-	var module_path = 'res://Qtoolkit/modules/public/' + module_name
+	var module_path = 'res://Qtoolkit/modules/public/' + module_name + ext
 	
-	if !File.new().file_exists(module_path):
+	if !TypeFile.file_exists(module_path):
 		print("Inner module: <" + module_path + "> [no exist]")
 	else:
 		var moduleExist = frameworkSearchModule(module_name)
@@ -75,3 +75,15 @@ func require(module_name, module_download):
 		
 		return module
 	
+
+func get_environment():
+	"""
+	@ Class / Method description
+	"""
+	var ext
+	if ENVIRONMENT == DEVELOPMENT:
+		ext = ".gd"
+	else:
+		ext = ".gdc"
+	
+	return ext

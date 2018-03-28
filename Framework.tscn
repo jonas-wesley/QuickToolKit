@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Framework.gd" type="Script" id=1]
 
-[node name="Framework" type="Node" index="0"]
+[node name="Framework" type="Node"]
 
 script = ExtResource( 1 )
+ENVIRONMENT = "development"
 
 

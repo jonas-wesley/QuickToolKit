@@ -1,4 +1,4 @@
-extends Node
+extends "res://Qtoolkit/libs/types.gd"
 
 var frameworkCurrentLibs = {}
 var frameworkLib = {}
@@ -21,6 +21,7 @@ func _init():
 		"has_module" : false,
 		"module" : frameworkMods
 	}
+	
 	
 
 func frameworkAddLibrary(library_name, library_path, library_pointer):

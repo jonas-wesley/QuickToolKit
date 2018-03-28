@@ -14,10 +14,6 @@ config/name="QuickToolKit"
 run/main_scene="res://Framework.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-QuickToolKit="*res://Qtoolkit/libs/const.gd"
-
 [editor_plugins]
 
 enabled=PoolStringArray( "Environment2D" )
